@@ -244,6 +244,33 @@
                                             init_k_value, 
                                             fix_k, fix_k_value){
 
+
+
+    if(length(observation_columns) == 1 & fix_k == FALSE){
+      warning("Only one observation provided, k must be fixed.")
+      fix_k <- TRUE
+    }
+
+    if(fix_k == TRUE & length(fix_k_value) == 0){
+      warning(paste("No k value provided, using ", init_k_value, sep = ""))
+      fix_k_value <- init_k_value
+    }
+
+    if(fix_k == FALSE & length(fix_k_value) == 0){
+      fix_k_value <- init_k_value
+    }
+
+    if(length(fix_k_value) > 0){
+      if(fix_k_value < 0){
+        warning("Provided k too small, using k = 0.0")
+        fix_k_value <- 0
+      }
+      if(fix_k_value > 1){
+        warning("Provided k too large, using k = 1.0")
+        fix_k_value <- 1
+      }
+    }
+
     # set up the size classes
 
       sccol <- which(colnames(data) == size_class_column)
