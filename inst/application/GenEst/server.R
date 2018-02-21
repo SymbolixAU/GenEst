@@ -137,16 +137,8 @@
 
         })
 
-      # when the MD file is uploaded, pull data in 
 
-        observeEvent(input$MDFile, {
-
-          rv$MDdataIn <- read.csv(input$MDFile$datapath, header = T)
-          output$MDin <- renderTable(rv$MDdataIn)
-
-          updateTabsetPanel(session, "LoadedDataViz", "Meta Data")
-        })
-  
+ 
 
     # Search Efficiency
 
@@ -173,6 +165,8 @@
             rv$fixKchoice <- input$fixKchoice
             rv$fixKvalchoice <- input$fixKvalchoice
             rv$Niterations <- input$Niterations
+
+
             rv$SEmods <- se_model_set_across_sizes_fit(data = rv$SEdataIn, 
                                    observation_columns = rv$SEobscols,
                                    predictors = rv$SEvars,
